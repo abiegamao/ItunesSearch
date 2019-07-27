@@ -3,3 +3,10 @@ Pods/
 
 ## User settings
 xcuserdata/
+*.generated.swift
+
+## Xcode Patch
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+!*.xcodeproj/xcshareddata/
+**/xcshareddata/WorkspaceSettings.xcsettings
