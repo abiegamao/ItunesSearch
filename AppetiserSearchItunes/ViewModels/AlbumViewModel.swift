@@ -8,37 +8,59 @@
 
 import UIKit
 
-class AlbumViewModel: NSObject, SortOrderProtocol {
+class AlbumViewModel: NSObject {
     let trackName: String
-    let artwork: String
+    let artwork100: String
     let price: Double
     let genre: String
-    var sortOrder: Int
+    let longDescription: String
     let album: DataModels.Album
+    let lastVisitedDate: Date
     
-    init(album: DataModels.Album, sortOrder: Int = 0) {
+    init(album: DataModels.Album, lastVisitedDate: Date = Date()) {
         self.album = album
         self.genre = album.primaryGenreName
-        self.artwork = album.artworkUrl100
+        self.artwork100 = album.artworkUrl100
         self.trackName = album.trackName
         self.price = album.trackPrice
-        self.sortOrder = sortOrder
+        self.longDescription = album.longDescription
+        self.lastVisitedDate = lastVisitedDate
+    }
+
+    func trackNameAttributed(alignment: NSTextAlignment = .left) -> NSAttributedString {
+        return trackName.attributed(font: UIFont.systemFont(ofSize: 15), alignment: alignment)
     }
     
-    func trackNameAttributed() -> NSAttributedString {
-        return trackName.attributed(font: UIFont.systemFont(ofSize: 13), alignment: .left)
+    func genreAttributed(alignment: NSTextAlignment = .left) -> NSAttributedString {
+        return genre.attributed(font: UIFont.systemFont(ofSize: 14), alignment: alignment)
     }
     
-    func genreAttributed() -> NSAttributedString {
-        return genre.attributed(font: UIFont.systemFont(ofSize: 12), alignment: .left)
+    func priceAttributed(alignment: NSTextAlignment = .left) -> NSAttributedString {
+        return "$\(price)".attributed(font: UIFont.systemFont(ofSize: 14), alignment: alignment)
     }
     
-    func priceAttributed() -> NSAttributedString {
-        return "$\(price)".attributed(font: UIFont.systemFont(ofSize: 12), alignment: .left)
+    func longDescAttributed(alignment: NSTextAlignment = .center) -> NSAttributedString {
+        let str = longDescription.isEmpty ? "No Description Provided" : longDescription
+        return str.attributed(font: UIFont.systemFont(ofSize: 14), alignment: alignment)
     }
     
-    var artworkURL: URL? {
-        return URL(string: artwork)
+    func lastVisitedDateAttributed(alignment: NSTextAlignment = .right) -> NSAttributedString {
+        return "Last Visited: \(lastVisitedDate.displayString)".attributed(font: UIFont.systemFont(ofSize: 14),
+                                                                           color: .gray, alignment: alignment)
+    }
+    
+    var artwork100URL: URL? {
+        return URL(string: artwork100)
+    }
+    
+    func saveToUserDefaults() {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(trackName, forKey: Keys.lastSavedTrackName)
+        userDefaults.set(artwork100, forKey: Keys.lastSavedImageURL)
+        userDefaults.set(genre, forKey: Keys.lastSavedGenre)
+        userDefaults.set(price, forKey: Keys.lastSavedPrice)
+        userDefaults.set(longDescription, forKey: Keys.lastSavedLongDesc)
+        userDefaults.set(Date().timeIntervalSince1970, forKey: Keys.lastSavedDate)
     }
 }
 

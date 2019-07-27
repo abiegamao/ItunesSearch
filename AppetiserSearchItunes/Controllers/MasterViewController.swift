@@ -8,6 +8,12 @@
 
 import AsyncDisplayKit
 
+/**
+ * MasterViewController
+ * Displays all Albums/Movies under the iTunes Search API
+ * Added Search Functionality
+ * Default Params: term = "star", country = "au", media = "movie"
+ **/
 class MasterViewController: ASViewController<AlbumSearchNode> {
     var listSections = [ListDiffable]()
     var officialNode: AlbumSearchNode
@@ -30,6 +36,22 @@ class MasterViewController: ASViewController<AlbumSearchNode> {
         super.viewDidLoad()
         searchMovies(query: URL.defaultTerm)
         setupNavigationBar()
+        checking()
+    }
+    
+    func checking() {
+        let ud = UserDefaults.standard
+        if let trackName = ud.string(forKey: Keys.lastSavedTrackName),
+            let artwork100 = ud.string(forKey: Keys.lastSavedImageURL),
+            let genre = ud.string(forKey: Keys.lastSavedGenre),
+            let longDesc = ud.string(forKey: Keys.lastSavedLongDesc) {
+            let price = ud.double(forKey: Keys.lastSavedPrice)
+            let date = UserDefaults.standard.object(forKey: Keys.lastSavedDate) as? Date ?? Date()
+            let album = DataModels.Album(trackName: trackName, artwork100: artwork100, price: price, genre: genre, longDescription: longDesc)
+            let model = AlbumViewModel(album: album, lastVisitedDate: date)
+            let vc = DetailViewController(model: model)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,7 +60,7 @@ class MasterViewController: ASViewController<AlbumSearchNode> {
 }
 
 
-// MARK: - Setup Methods
+// MARK: - Setup & Reload Methods
 extension MasterViewController {
     /// Setup ListAdapter (IGListKit)
     fileprivate func setupListAdapter() {
@@ -58,9 +80,7 @@ extension MasterViewController {
     
     func reloadData() {
         var vms: [AlbumViewModel] = []
-        albums.sorted(by: { (alb1, alb2) -> Bool in
-            return alb1.collectionName < alb2.collectionName
-        }).forEach { vms.append(AlbumViewModel(album: $0)) }
+        albums.forEach { vms.append(AlbumViewModel(album: $0)) }
         listSections = vms as [ListDiffable]
         reloadAdapter()
     }
@@ -75,13 +95,7 @@ extension MasterViewController {
 // MARK: - List Adapter Datasource, Fill in Data
 extension MasterViewController: ListAdapterDataSource {
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        let sorted = listSections.sorted(by: { (left: Any, right: Any) -> Bool in
-            guard let left = left as? SortOrderProtocol, let right = right as? SortOrderProtocol else {
-                return false
-            }
-            return left.sortOrder < right.sortOrder
-        })
-        return sorted
+        return listSections
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
@@ -99,39 +113,30 @@ extension MasterViewController: ListAdapterDataSource {
     }
 }
 
+
+// MARK: - Section Controller Delegates
 extension MasterViewController: AlbumSectionControllerDelegate {
     func albumSectionDidSelectItem(model: AlbumViewModel) {
-        LoadingScreen.show()
-        
+        let vc = DetailViewController(model: model)
+        model.saveToUserDefaults()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-// MARK: - API Calls : Search An Album / Track
+// MARK: - API Calls : Search A Movie
 extension MasterViewController {
-    func searchTrack(id: Int) {
-        WebService.shared.getAlbumTracks(collectionId: id) { (response) in
-            if let err = response.error {
-                print(err.localizedDescription)
-            } else {
-                if let tracks = response.tracks {
-                    print(tracks.count)
-                }
-            }
-        }
-    }
-    
     func searchMovies(query: String) {
         LoadingScreen.show()
         WebService.shared.getMovies(query: query) { [weak self](response) in
             guard let weakSelf = self else { return }
             
-            if let err = response.error {
+            if let err = response?.error {
                 DispatchQueue.main.async {
                     LoadingScreen.hide()
                     print(err.localizedDescription)
                 }
             } else {
-                if let albums = response.albums {
+                if let albums = response?.albums {
                     weakSelf.albums = albums
                     weakSelf.reloadData()
                     

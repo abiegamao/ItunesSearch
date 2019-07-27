@@ -12,26 +12,26 @@ extension DataModels {
     class Album: Decodable {
         var artworkUrl100: String = ""
         var artworkUrl60: String = ""
-        var collectionId: Int = 0
-        var collectionName: String = ""
-        var country: String = ""
         var trackPrice: Double = 0.0
         var trackName: String = ""
         var longDescription : String = ""
         var primaryGenreName: String = ""
-        var releaseDate: String = ""
         
         enum CodingKeys: String, CodingKey {
             case artworkUrl100
             case artworkUrl60
-            case collectionId
-            case collectionName
-            case country
             case primaryGenreName
-            case releaseDate
             case trackName
             case trackPrice
             case longDescription
+        }
+        
+        init(trackName: String, artwork100: String, price: Double, genre: String, longDescription: String) {
+            self.primaryGenreName = genre
+            self.artworkUrl100 = artwork100
+            self.trackName = trackName
+            self.trackPrice = price
+            self.longDescription = longDescription
         }
         
         required init(from decoder: Decoder) throws {
@@ -39,11 +39,7 @@ extension DataModels {
             trackName = try container.decodeIfPresent(String.self, forKey: .trackName) ?? trackName
             artworkUrl100 = try container.decodeIfPresent(String.self, forKey: .artworkUrl100) ?? artworkUrl100
             artworkUrl60 = try container.decodeIfPresent(String.self, forKey: .artworkUrl60) ?? artworkUrl60
-            collectionId = try container.decodeIfPresent(Int.self, forKey: .collectionId) ?? collectionId
-            collectionName = try container.decodeIfPresent(String.self, forKey: .collectionName) ?? collectionName
-            country = try container.decodeIfPresent(String.self, forKey: .country) ?? country
             primaryGenreName = try container.decodeIfPresent(String.self, forKey: .primaryGenreName) ?? primaryGenreName
-            releaseDate = try container.decodeIfPresent(String.self, forKey: .releaseDate) ?? releaseDate
             longDescription = try container.decodeIfPresent(String.self, forKey: .longDescription) ?? longDescription
             trackPrice = try container.decodeIfPresent(Double.self, forKey: .trackPrice) ?? trackPrice
         }

@@ -7,6 +7,10 @@
 //
 import UIKit
 
+extension UIColor {
+    static let darkWhite: UIColor = UIColor(red: 0.957, green: 0.957, blue: 0.957, alpha: 1.000)
+}
+
 struct Shadow {
     var color: CGColor?
     var offset: CGSize

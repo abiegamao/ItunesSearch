@@ -27,10 +27,6 @@ extension URL {
     }
     
     static func searchMovies(query: String = defaultTerm) -> URL? {
-        return URL(string: base + "/search?term=\(query)&amp;country=\(country)&amp;media=\(media)&amp;all")
-    }
-    
-    static func lookUpMovie(id: Int) -> URL? {
-        return URL(string: base + "/lookup?entity=song&id=\(id)")
+        return URL(string: base + "/search?term=\(query)&amp;country=\(country);media=\(media);all")
     }
 }

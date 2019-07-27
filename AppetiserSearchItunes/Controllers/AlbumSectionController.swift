@@ -9,13 +9,20 @@
 import Foundation
 import AsyncDisplayKit
 
+
+/// Delegate for Selection
 protocol AlbumSectionControllerDelegate: class {
     func albumSectionDidSelectItem(model: AlbumViewModel)
 }
 
+/**
+ * AlbumSectionController
+ * Wrapper for AlbumCellNode
+ * IGListKit
+ **/
 class AlbumSectionController: ListSectionController, ASSectionController {
     weak var delegate: AlbumSectionControllerDelegate?
-    private let model: AlbumViewModel
+    let model: AlbumViewModel
     
     init(model: AlbumViewModel) {
         self.model = model

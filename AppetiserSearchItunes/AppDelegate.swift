@@ -18,10 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let launcher = ASNavigationController(rootViewController: MasterViewController())
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.tintColor = UIColor.orange
+        window?.tintColor = UIColor.black
         window?.rootViewController = launcher
         window?.makeKeyAndVisible()
+        
         return true
     }
 
@@ -96,3 +98,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+// MARK: - Easy Calling of Launcher and AppDelegate
+extension UIApplication {
+    static var appDelegate: AppDelegate { return shared.delegate as! AppDelegate }
+    static var launcher: UIViewController? { return appDelegate.window?.rootViewController }
+}
