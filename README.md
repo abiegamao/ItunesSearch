@@ -1,6 +1,6 @@
 # ItunesSearch 
 - By Joenabie Gamao
-Search using iTunes API, layout using AsyncDisplayKit + IGListKit
+- Search using iTunes API, layout using AsyncDisplayKit + IGListKit
 
 # Frameworks / Technology Used:
   - AsyncDisplayKit/Texture - Asynchronous UI
