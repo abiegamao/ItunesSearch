@@ -2,21 +2,26 @@
 //  AppDelegate.swift
 //  AppetiserSearchItunes
 //
-//  Created by Abz Maxey on 25/07/2019.
+//  Created by Abz Maxey on 27/07/2019.
 //  Copyright © 2019 Abz Maxey. All rights reserved.
 //
 
 import UIKit
 import CoreData
+import AsyncDisplayKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let launcher = ASNavigationController(rootViewController: MasterViewController())
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.tintColor = UIColor.orange
+        window?.rootViewController = launcher
+        window?.makeKeyAndVisible()
         return true
     }
 
