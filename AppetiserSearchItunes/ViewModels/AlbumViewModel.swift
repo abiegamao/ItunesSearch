@@ -16,8 +16,9 @@ class AlbumViewModel: NSObject {
     let longDescription: String
     let album: DataModels.Album
     let lastVisitedDate: Date
+    let fromUserDefaults: Bool
     
-    init(album: DataModels.Album, lastVisitedDate: Date = Date()) {
+    init(album: DataModels.Album, lastVisitedDate: Date = Date(), fromUserDefaults: Bool = false) {
         self.album = album
         self.genre = album.primaryGenreName
         self.artwork100 = album.artworkUrl100
@@ -25,6 +26,7 @@ class AlbumViewModel: NSObject {
         self.price = album.trackPrice
         self.longDescription = album.longDescription
         self.lastVisitedDate = lastVisitedDate
+        self.fromUserDefaults = fromUserDefaults
     }
 
     func trackNameAttributed(alignment: NSTextAlignment = .left) -> NSAttributedString {
@@ -44,9 +46,11 @@ class AlbumViewModel: NSObject {
         return str.attributed(font: UIFont.systemFont(ofSize: 14), alignment: alignment)
     }
     
-    func lastVisitedDateAttributed(alignment: NSTextAlignment = .right) -> NSAttributedString {
-        return "Last Visited: \(lastVisitedDate.displayString)".attributed(font: UIFont.systemFont(ofSize: 14),
-                                                                           color: .gray, alignment: alignment)
+    func lastVisitedDateAttributed(alignment: NSTextAlignment = .right) -> NSAttributedString? {
+        if fromUserDefaults  {
+            return "Last Visited: \(lastVisitedDate.displayString)".attributed(font: UIFont.systemFont(ofSize: 14),                                                              color: .gray, alignment: alignment)
+        }
+        return nil
     }
     
     var artwork100URL: URL? {
@@ -60,7 +64,7 @@ class AlbumViewModel: NSObject {
         userDefaults.set(genre, forKey: Keys.lastSavedGenre)
         userDefaults.set(price, forKey: Keys.lastSavedPrice)
         userDefaults.set(longDescription, forKey: Keys.lastSavedLongDesc)
-        userDefaults.set(Date().timeIntervalSince1970, forKey: Keys.lastSavedDate)
+        userDefaults.set(Date(), forKey: Keys.lastSavedDate)
     }
 }
 

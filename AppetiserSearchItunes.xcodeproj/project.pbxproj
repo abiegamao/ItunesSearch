@@ -31,6 +31,7 @@
 		446DE53C22EC8DC600E40EFD /* NSObject+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446DE53B22EC8DC600E40EFD /* NSObject+Extentions.swift */; };
 		446DE53E22EC97A700E40EFD /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446DE53D22EC97A700E40EFD /* Date+Extensions.swift */; };
 		446DE54022EC97C800E40EFD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446DE53F22EC97C800E40EFD /* Keys.swift */; };
+		446DE54222EE73BE00E40EFD /* HeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446DE54122EE73BE00E40EFD /* HeaderModel.swift */; };
 		447AC92C22E9C95800868B4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC92B22E9C95800868B4A /* AppDelegate.swift */; };
 		447AC93422E9C95800868B4A /* AppetiserSearchItunes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 447AC93222E9C95800868B4A /* AppetiserSearchItunes.xcdatamodeld */; };
 		447AC93622E9C95900868B4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 447AC93522E9C95900868B4A /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		446DE53B22EC8DC600E40EFD /* NSObject+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extentions.swift"; sourceTree = "<group>"; };
 		446DE53D22EC97A700E40EFD /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		446DE53F22EC97C800E40EFD /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		446DE54122EE73BE00E40EFD /* HeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderModel.swift; sourceTree = "<group>"; };
 		447AC92822E9C95800868B4A /* AppetiserSearchItunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppetiserSearchItunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		447AC92B22E9C95800868B4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447AC93322E9C95800868B4A /* AppetiserSearchItunes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AppetiserSearchItunes.xcdatamodel; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				447AC94422E9D6B300868B4A /* Album.swift */,
+				446DE54122EE73BE00E40EFD /* HeaderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				446DE53622EC7AB000E40EFD /* DetailViewController.swift in Sources */,
 				446DE53022EC694C00E40EFD /* Corner.swift in Sources */,
 				446DE50C22EC3D7000E40EFD /* URL+Extensions.swift in Sources */,
+				446DE54222EE73BE00E40EFD /* HeaderModel.swift in Sources */,
 				446DE51B22EC453000E40EFD /* MasterViewController.swift in Sources */,
 				446DE50A22EC3D6400E40EFD /* AlbumViewModel.swift in Sources */,
 				446DE53822EC7EC700E40EFD /* AlbumDetailSectionController.swift in Sources */,

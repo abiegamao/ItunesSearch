@@ -46,6 +46,8 @@ extension DataModels {
     }
 }
 
+
+// MARK: - Decode Album
 extension DataModels.Album {
     /// Wrapper for decoding data
     public static func decode(data: Data) ->  DataModels.Album? {

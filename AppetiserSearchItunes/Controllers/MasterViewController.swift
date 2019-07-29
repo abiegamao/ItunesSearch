@@ -48,7 +48,7 @@ class MasterViewController: ASViewController<AlbumSearchNode> {
             let price = ud.double(forKey: Keys.lastSavedPrice)
             let date = UserDefaults.standard.object(forKey: Keys.lastSavedDate) as? Date ?? Date()
             let album = DataModels.Album(trackName: trackName, artwork100: artwork100, price: price, genre: genre, longDescription: longDesc)
-            let model = AlbumViewModel(album: album, lastVisitedDate: date)
+            let model = AlbumViewModel(album: album, lastVisitedDate: date, fromUserDefaults: true)
             let vc = DetailViewController(model: model)
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -125,6 +125,10 @@ extension MasterViewController: AlbumSectionControllerDelegate {
 
 // MARK: - API Calls : Search A Movie
 extension MasterViewController {
+    
+    /// Search movies
+    ///
+    /// - Parameter query: Search Bar Text
     func searchMovies(query: String) {
         LoadingScreen.show()
         WebService.shared.getMovies(query: query) { [weak self](response) in

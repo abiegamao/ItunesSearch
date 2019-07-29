@@ -8,18 +8,7 @@
 
 import AsyncDisplayKit
 
-class HeaderModel: NSObject {
-    var title: String
-    var subTitle: String?
-    
-    init(title: String, subTitle: String? = nil) {
-        self.title = title
-        self.subTitle = subTitle
-    }
-}
-
 class AlbumSearchNode: ASDisplayNode {
-    private var fetchContext: ASBatchContext?
     var data: HeaderModel
     lazy var collectionNode: ASCollectionNode = {
         let collectionNode = CustomCollectionNode(flowLayout: UICollectionViewFlowLayout())

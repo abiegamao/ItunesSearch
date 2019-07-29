@@ -8,7 +8,7 @@
 
 import AsyncDisplayKit
 
-// -- Cell Node for DetailViewController
+// Cell Node for DetailViewController
 class AlbumDetailCellNode: AlbumCellNode {
     let longDescTextNode: ASTextNode = {
         let label = ASTextNode()
@@ -28,7 +28,9 @@ class AlbumDetailCellNode: AlbumCellNode {
         trackNameTextNode.attributedText = model.trackNameAttributed(alignment: .center)
         genreTextNode.attributedText = model.genreAttributed(alignment: .center)
         priceTextNode.attributedText = model.priceAttributed(alignment: .center)
-        lastVisitedTextNode.attributedText = model.lastVisitedDateAttributed()
+        if let lastDateAttrText = model.lastVisitedDateAttributed() {
+            lastVisitedTextNode.attributedText = lastDateAttrText
+        }
         imageNode.style.preferredSize = CGSize(width: 100, height: 100) // Still Blurry on Retina Devices
         if let imageUrl = model.artwork100URL {
             imageNode.url = imageUrl

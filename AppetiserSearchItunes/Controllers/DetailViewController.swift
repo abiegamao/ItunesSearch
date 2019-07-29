@@ -48,6 +48,7 @@ extension DetailViewController {
     func loadSections() {
         listSections = [model] as [ListDiffable]
     }
+    
     /// Setup ListAdapter (IGListKit)
     fileprivate func setupListAdapter() {
         adapter.setASDKCollectionNode(officialNode.collectionNode)

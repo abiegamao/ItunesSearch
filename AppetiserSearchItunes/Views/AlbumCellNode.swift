@@ -8,7 +8,7 @@
 
 import AsyncDisplayKit
 
-// -- Cell Node for MasterViewController
+// Cell Node for MasterViewController
 class AlbumCellNode: ASCellNode {
     let model: AlbumViewModel
     

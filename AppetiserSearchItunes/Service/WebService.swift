@@ -17,7 +17,14 @@ class WebService {
     }
 }
 
+// MARK: Methods
 extension WebService {
+    
+    /// Get movies from Itunes Search API
+    ///
+    /// - Parameters:
+    ///   - query: Search Bar Text
+    ///   - completion: Return Albums Response : Either Albums List or an Error
     func getMovies (query: String, completion: @escaping (AlbumsResponse?)->()) {
         let searchString = query.replacingOccurrences(of: " ", with: "+")
         if let url = URL.searchMovies(query: searchString) {

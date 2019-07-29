@@ -8,6 +8,8 @@
 
 import AsyncDisplayKit
 
+
+/// Wrapping Search Node for Texture
 class SearchNode: ASDisplayNode {
     var bar: UISearchBar? {
         return self.view as? UISearchBar
