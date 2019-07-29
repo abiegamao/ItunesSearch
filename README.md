@@ -13,6 +13,7 @@
 - Go to folder via terminal and enter "pod install"
 
 # Other Notes
-Ps. I have added a Search Controller to test other data. 
+I have added a Search Controller to test other data. 
+
   
   
